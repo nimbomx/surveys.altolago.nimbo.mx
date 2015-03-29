@@ -94,6 +94,7 @@ function getSurveys(date){
     surveysSync=true;
   });
 }
+
 function syncSurvey(){
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
   db.transaction(function (tx) {  
@@ -107,7 +108,6 @@ function syncSurvey(){
       getSurveys(date);
     });
   });
-  
 }
 
 function writeSurveys(){
@@ -130,8 +130,13 @@ function writeSurveys(){
    }, null);
  });
 }
-$(function() {
 
+
+
+
+
+
+$(function() {
   $('#refresh').on('click',function(){
     localStorage.removeItem("deviceName");
     location.reload();
@@ -164,10 +169,9 @@ var register={
             'Ok'                  // buttonName
             );
   }
-  
-
-
 }
+
+
 var app = {
   initialize: function() {
     this.bindEvents();
@@ -189,10 +193,11 @@ var app = {
   },
   onDeviceOnline: function() {
     if(!surveysSync) syncSurvey();
-    $.ajax({url:"http://altolago.nimbo.pro/surveys"}).success(function(res){
+    if(!surveysW)writeSurveys();
+   /* $.ajax({url:"http://altolago.nimbo.pro/surveys"}).success(function(res){
       $('#webserviceMsg').html(res);
-      if(!surveysW)writeSurveys();
-    });
+      
+    });*/
   },
   onDeviceOffline: function() {
     $('#webserviceMsg').html(offline);
