@@ -88,26 +88,28 @@ function onPrompt(results) {
 
  // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
+function getSurveys(date){
+  $.ajax({url:"http://altolago.nimbo.pro/surveys",data:{}}).success(function(res){
+    alert('date: '+res);
+    surveysSync=true;
+  });
+}
 function syncSurvey(){
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
   db.transaction(function (tx) {  
     tx.executeSql('CREATE TABLE IF NOT EXISTS Sync (id unique, name, synced_at)');
-    tx.executeSql('SELECT * FROM Sync WHERE name = ?',['default'],function(tx,results){
+    tx.executeSql('SELECT * FROM Sync WHERE name = ?',['Surveys'],function(tx,results){
       var len = results.rows.length, i;
-      if(len==0){
-        alert('nosync');
-        tx.executeSql('INSERT INTO Sync (id, name, synced_at) VALUES (1, "default","2015-01-01 00:00:00")');
-      }else{
-        $.post("http://altolago.nimbo.pro/register",{},function(e){
-          alert(e)
-        });
-
-        alert(results.rows.item(0).synced_at);
+      var date='2000-01-01 00:00:00';
+      if(len!=0){
+        date=(results.rows.item(0).synced_at);
       }
+      getSurveys(date);
     });
   });
-  surveysSync=true;
+  
 }
+
 function writeSurveys(){
   surveysW=true;
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
@@ -118,16 +120,14 @@ function writeSurveys(){
   db.transaction(function (tx) {
    tx.executeSql('SELECT * FROM Encuestas', [], function (tx, results) {
      var len = results.rows.length, i;
-     msg = "<p>Found rows: " + len + "</p>";
-    // document.querySelector('#status').innerHTML +=  msg;
-    $('#encuestas').html('');
-    for (i = 0; i < len; i++){
+     $('#encuestas').html('');
+     for (i = 0; i < len; i++){
 
-     $('#encuestas').append('<a href="encuesta.html"><button class="txtBtn"><div class="shadow"></div><div class="active"><table><tr><td>'+results.rows.item(i).name+'</td></tr></table></div></button></a>');
+       $('#encuestas').append('<a href="encuesta.html"><button class="txtBtn"><div class="shadow"></div><div class="active"><table><tr><td>'+results.rows.item(i).name+'</td></tr></table></div></button></a>');
 
-   }
-   animateTxtBtn();
- }, null);
+     }
+     animateTxtBtn();
+   }, null);
  });
 }
 $(function() {
