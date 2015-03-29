@@ -89,7 +89,7 @@ function onPrompt(results) {
  // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
 function getSurveys(date){
-  $.ajax({{data:{
+  $.ajax({data:{
       date:date},url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
       alert('date: '+res);
       
