@@ -89,12 +89,13 @@ function onPrompt(results) {
  // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
 function getSurveys(date){
-    $.ajax({data:{
-      date:date
-    },url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
-      $('#webserviceMsg').append(res);
-      alert('date: '+res);
-    });
+  alert(date);
+  $.ajax({data:{
+    date:date
+  },url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
+    $('#webserviceMsg').append(res);
+    alert('date: '+res);
+  });
 }
 
 function syncSurvey(){
@@ -202,10 +203,10 @@ var app = {
       $('#webserviceMsg').html(res);
       
     });*/
-  },
-  onDeviceOffline: function() {
-    $('#webserviceMsg').html(offline);
-  }
+},
+onDeviceOffline: function() {
+  $('#webserviceMsg').html(offline);
+}
 }
 
 /*
