@@ -89,13 +89,15 @@ function onPrompt(results) {
  // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
 function getSurveys(date){
-  $.ajax({url:"http://altolago.nimbo.pro/syncsurveys",data:{date:date}}).success(function(res){
-    alert('date: '+res);
-    surveysSync=true;
+  $.ajax({{data:{
+      date:date},url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
+      alert('date: '+res);
+      
   });
 }
 
 function syncSurvey(){
+  surveysSync=true;
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
   db.transaction(function (tx) {  
     tx.executeSql('CREATE TABLE IF NOT EXISTS Sync (id unique, name, synced_at)');
