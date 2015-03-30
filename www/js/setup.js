@@ -76,7 +76,6 @@ function getSurveys(date){
         tx.executeSql('CREATE TABLE IF NOT EXISTS Surveys (id unique, name, description,active)');
       });
 
-
       db.transaction(function (tx) {  
         var len = res.surveys.length;
         for(n in res.surveys){
@@ -87,12 +86,12 @@ function getSurveys(date){
       db.transaction(function (tx) {  
         tx.executeSql('UPDATE Sync SET synced_at=? WHERE name = ?',[res.sync.synced_at,'Surveys']);
       });
-  
-}else{
-  if(!surveysW)writeSurveys();
-}
 
-});
+    }else{
+      if(!surveysW)writeSurveys();
+    }
+
+  });
 }
 
 function syncSurvey(){
@@ -115,11 +114,11 @@ function writeSurveys(){
   surveysW=true;
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
   db.transaction(function (tx) {
-   tx.executeSql('SELECT * FROM Surveys', [], function (tx, results) {
+    tx.executeSql('SELECT * FROM Surveys WHERE active=1', [], function (tx, results) {
      var len = results.rows.length, i;
      $('#encuestas').html('');
      for (i = 0; i < len; i++){
-       $('#encuestas').append('<a href="encuesta.html"><button class="txtBtn"><div class="shadow"></div><div class="active"><table><tr><td>'+results.rows.item(i).name+'</td></tr></table></div></button></a>');
+       $('#encuestas').append('<a href="encuesta.html#'+results.rows.item(i).id+'"><button class="txtBtn"><div class="shadow"></div><div class="active"><table><tr><td>'+results.rows.item(i).name+'</td></tr></table></div></button></a>');
      }
      animateTxtBtn();
    }, null);
@@ -190,7 +189,6 @@ var app = {
     'Device UUID: '     + device.uuid     + '<br />' +
     'Device Version: '     + device.version     + '<br />' +
     'Device Name: '  + localStorage.getItem("deviceName")  + '<br />';
-    //alert('deviceready');
   },
   onDeviceOnline: function() {
     if(!surveysSync) syncSurvey();
