@@ -18,14 +18,10 @@
 		$(function(){
 			id=location.hash
 			idSurvey=id.replace('#','');
-			alert(idSurvey);
 			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM Surveys WHERE id='+idSurvey, [], function (tx, results) {
-					var len = results.rows.length;
-					alert(len);
-					//alert(results.rows.item(0)['name']);
-					alert(results.rows.item(0).name);
+					$('#testM').html(results.rows.item(0).name);
 				});
 			});
 		})
@@ -104,7 +100,7 @@
 			<tr>
 				<td>
 					
-					fgd gfdg fgd df g
+					<div id="testM"></div>
 
 				</td>
 
