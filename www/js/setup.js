@@ -88,8 +88,8 @@ function getSurveys(date){
       });
 
       db.transaction(function (tx) {  
-        for(n in res.survey_structure){
-          tx.executeSql('INSERT INTO Structure (id, id_survey,id_kind, values, order,group) VALUES (?,?,?,?,?,?)',[res.survey_structure[n].id,res.survey_structure[n].id_survey,res.survey_structure[n].id_kind,res.survey_structure[n].values,res.survey_structure[n].order,res.survey_structure[n].group]);
+        for(m in res.survey_structure){
+          tx.executeSql('INSERT INTO Structure (id, id_survey,id_kind, values, order,group) VALUES (?,?,?,?,?,?)',[res.survey_structure[m].id,res.survey_structure[m].id_survey,res.survey_structure[m].id_kind,JSON.stringify(res.survey_structure[m].values),res.survey_structure[m].order,res.survey_structure[m].group]);
         }
         if(!surveysW)writeSurveys();
       });
