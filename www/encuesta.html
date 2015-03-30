@@ -18,18 +18,27 @@
 		$(function(){
 			id=location.hash
 			idSurvey=id.replace('#','');
-			alert(idSurvey);
+			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
+			db.transaction(function (tx) {
+				tx.executeSql('SELECT * FROM Surveys WHERE active=1 and id = ?', [idSurvey], function (tx, results) {
+					alert(results.rows.item(0).name);
+				}, null);
+			});
 		})
+
+		
+
+
 		function startSurvey(){
 			/*$('#logo').animate({'height':'100px'},1000,function(){
 				$('#well').fadeOut();
 			});*/
 
 $('#page-wrap').animate({'right':'100%'},1000, function() {
-	
+
 });
 $('#page1').animate({'right':'0%'},1000, function() {
-	
+
 });
 }
 </script>
