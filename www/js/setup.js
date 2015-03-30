@@ -79,6 +79,8 @@ function getSurveys(date){
       db.transaction(function (tx) {  
         for(n in res.surveys){
           tx.executeSql('INSERT INTO Surveys (id, name,description,active) VALUES (?,?,?,?)',[res.surveys[n].id,res.surveys[n].name,res.surveys[n].description,res.surveys[n].active]);
+          tx.executeSql('SELECT * FROM Structure', [], function (tx, results) {
+          alert(results.rows.length);
         }
       });
 
