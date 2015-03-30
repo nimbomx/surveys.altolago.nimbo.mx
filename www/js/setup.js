@@ -41,25 +41,9 @@ function onConfirm(buttonIndex){
       localStorage.setItem("deviceName", res);
       location.reload();
     });
-
-    /*$.post("http://altolago.nimbo.pro/register",{
-      name:deviceNameTmp,
-      model:device.model,
-      plataform:device.platform,
-      uuid:device.uuid,
-      version:device.version
-    },function(){
-      if(e=='ok'){
-        localStorage.setItem("deviceName", deviceNameTmp);
-        app.initialize();
-
-      }else{
-        alert('error');
-      }
-    });*/
-}else{
-  startReg();
-}
+  }else{
+    startReg();
+  }
 
 }
 function onPrompt(results) {
@@ -79,30 +63,32 @@ function onPrompt(results) {
         ['Ok','Cancelar']         // buttonLabels
         );
   }
-    /*navigator.notification.alert(
-            'You are the winner!',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-            );*/
-
- // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
 function getSurveys(date){
-  $('#webserviceMsg').html(date);
+  $('#webserviceMsg').html(date); 
   $.ajax({data:{
     date:date
   },url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
+    //alert('date: '+res.synced);
     if(res.synced=='false'){
-      alert(res.sync.id);
       var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
-      tx.executeSql('CREATE TABLE IF NOT EXISTS Sync (id unique, name, synced_at)');
-     // tx.executeSql('DELETE FROM Sync WHERE id = ?',[res.sync.id]);
-      tx.executeSql('INSERT INTO Sync (id, name,synced_at) VALUES (?,"?",?)',[res.sync.id,res.sync.name,res.sync.synced_at]);
-      tx.executeSql('UPDATE Sync SET synced_at=? WHERE id = ?',[res.sync.synced_at,res.sync.id]);
-    }else{
-      alert('date: '+res.synced);
+      db.transaction(function (tx) {  
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Surveys (id unique, name, description,active)');
+      });
+      db.transaction(function (tx) {  
+        tx.executeSql('TRUNCATE TABLE Surveys');
+      });
+      for(x in res.surveys){
+        db.transaction(function (tx) {  
+          tx.executeSql('INSERT INTO Surveys (id, name,description,active) VALUES (?,?,?,?)',[res.surveys[x].id,res.surveys[x].name,res.surveys[x].description,res.surveys[x].active]);
+        });
+      }
+      db.transaction(function (tx) {  
+        tx.executeSql('UPDATE Sync SET synced_at=? WHERE name = ?',[res.sync.synced_at,'Surveys']);
+      });
+      
     }
+    if(!surveysW)writeSurveys();
   });
 }
 
@@ -111,12 +97,11 @@ function syncSurvey(){
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
   db.transaction(function (tx) {  
     tx.executeSql('CREATE TABLE IF NOT EXISTS Sync (id unique, name, synced_at)');
+    tx.executeSql('INSERT INTO Sync (id, name,synced_at) VALUES (1,"Surveys","2000-01-01 00:00:00")');
+  });
+  db.transaction(function (tx) {  
     tx.executeSql('SELECT * FROM Sync WHERE name = ?',['Surveys'],function(tx,results){
-      var len = results.rows.length, i;
-      var date='2000-01-01 00:00:00';
-      if(len!=0){
-        date=(results.rows.item(0).synced_at);
-      }
+      date=(results.rows.item(0).synced_at);
       getSurveys(date);
     });
   });
@@ -125,18 +110,12 @@ function syncSurvey(){
 function writeSurveys(){
   surveysW=true;
   var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
-  db.transaction(function (tx) {  
-   tx.executeSql('CREATE TABLE IF NOT EXISTS Encuestas (id unique, name)');
-   tx.executeSql('INSERT INTO Encuestas (id, name) VALUES (1, "default")');
- });
   db.transaction(function (tx) {
-   tx.executeSql('SELECT * FROM Encuestas', [], function (tx, results) {
+   tx.executeSql('SELECT * FROM Surveys', [], function (tx, results) {
      var len = results.rows.length, i;
      $('#encuestas').html('');
      for (i = 0; i < len; i++){
-
        $('#encuestas').append('<a href="encuesta.html"><button class="txtBtn"><div class="shadow"></div><div class="active"><table><tr><td>'+results.rows.item(i).name+'</td></tr></table></div></button></a>');
-
      }
      animateTxtBtn();
    }, null);
@@ -150,11 +129,17 @@ function writeSurveys(){
 
 $(function() {
   $('#refresh').on('click',function(){
-    localStorage.removeItem("deviceName");
+    //localStorage.removeItem("deviceName");
+    var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
+    db.transaction(function (tx) {
+      tx.executeSql('DROP TABLE Sync');
+    });
     location.reload();
   })
   if (localStorage.getItem("deviceName") === null) {
+    $('#webserviceMsg').html('registrado');
     register.initialize();
+
   }else{
     app.initialize();
   }
@@ -204,6 +189,7 @@ var app = {
     //alert('deviceready');
   },
   onDeviceOnline: function() {
+    $('#webserviceMsg').html('online');
     if(!surveysSync) syncSurvey();
    // if(!surveysW)writeSurveys();
    /* $.ajax({url:"http://altolago.nimbo.pro/surveys"}).success(function(res){
@@ -212,22 +198,6 @@ var app = {
     });*/
 },
 onDeviceOffline: function() {
-  $('#webserviceMsg').html(offline);
+  $('#webserviceMsg').html('offline');
 }
 }
-
-/*
-document.addEventListener("deviceready", onDeviceReady, false);
-
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        var element = document.getElementById('deviceProperties');
-        element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
-                            'Device Model: '    + device.model    + '<br />' +
-                            'Device Cordova: '  + device.cordova  + '<br />' +
-                            'Device Platform: ' + device.platform + '<br />' +
-                            'Device UUID: '     + device.uuid     + '<br />' +
-                            'Device Version: '  + device.version  + '<br />';
-    }
-    */
