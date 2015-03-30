@@ -86,7 +86,7 @@ function getSurveys(date){
 
       db.transaction(function (tx) { 
         tx.executeSql('DROP TABLE Structure');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Structure (id unique, id_survey,id_kind, values, order,group)');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Structure (id unique, id_survey)');
       });
 
       db.transaction(function (tx) {  
