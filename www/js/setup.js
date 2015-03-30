@@ -73,25 +73,26 @@ function getSurveys(date){
       var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
       db.transaction(function (tx) {  
         tx.executeSql('DROP TABLE Surveys');
-      });
-      db.transaction(function (tx) {  
         tx.executeSql('CREATE TABLE IF NOT EXISTS Surveys (id unique, name, description,active)');
       });
-      
-      for(x in res.surveys){
-        db.transaction(function (tx) {  
-          tx.executeSql('INSERT INTO Surveys (id, name,description,active) VALUES (?,?,?,?)',[res.surveys[x].id,res.surveys[x].name,res.surveys[x].description,res.surveys[x].active]);
-        });
-      }
+
+
+      db.transaction(function (tx) {  
+        var len = res.surveys.length;
+        for(n in res.surveys){
+          tx.executeSql('INSERT INTO Surveys (id, name,description,active) VALUES (?,?,?,?)',[res.surveys[n].id,res.surveys[n].name,res.surveys[n].description,res.surveys[n].active]);
+        }
+        if(!surveysW)writeSurveys();
+      });
       db.transaction(function (tx) {  
         tx.executeSql('UPDATE Sync SET synced_at=? WHERE name = ?',[res.sync.synced_at,'Surveys']);
       });
-      if(!surveysW)writeSurveys();
-    }else{
-      if(!surveysW)writeSurveys();
-    }
-    
-  });
+  
+}else{
+  if(!surveysW)writeSurveys();
+}
+
+});
 }
 
 function syncSurvey(){
