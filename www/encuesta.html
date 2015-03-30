@@ -19,13 +19,18 @@
 			id=location.hash
 			idSurvey=id.replace('#','');
 			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
+
 			db.transaction(function (tx) {
+				alert(idSurvey);
+				tx.executeSql('SELECT * FROM SurveyStructure', [], function (tx, results) {
+            alert(results.rows.length)
+          });
 				/*tx.executeSql('SELECT * FROM Surveys WHERE id='+idSurvey, [], function (tx, results) {
 					var len = results.rows.length;
 					$('#testM').html(results.rows.item(0).name);
 				});*/
 			//WHERE id_survey='+idSurvey
-				tx.executeSql('SELECT * FROM SurveyStructure ', [], function (tx, results) {
+				tx.executeSql('SELECT * FROM SurveyStructure', [], function (tx, results) {
 					var len = results.rows.length;
 					alert(len)
 					$('#testM').append(len);
