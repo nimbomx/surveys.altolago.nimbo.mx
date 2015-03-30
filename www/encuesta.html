@@ -25,6 +25,8 @@
 					var len = results.rows.length;
 					$('#testM').html(results.rows.item(0).name);
 				});
+			})
+			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM Structure', [], function (tx, results) {
 					var len = results.rows.length;
 					alert(len)
