@@ -20,20 +20,21 @@
 			idSurvey=id.replace('#','');
 			alert(idSurvey);
 		})
-		/*function startSurvey(){
-			$('#logo').animate({'height':'100px'},1000,function(){
+		function startSurvey(){
+			/*$('#logo').animate({'height':'100px'},1000,function(){
 				$('#well').fadeOut();
-			});
-		}*/
-		$('#page-wrap').animate({'right':'100%'},1000, function() {
-			
-		});
-		$('#page1').animate({'right':'0%'},1000, function() {
-			
-		});
-	</script>
-	<script src='js/slidetounlock.js'></script>
-	<style type="text/css">
+			});*/
+
+$('#page-wrap').animate({'right':'100%'},1000, function() {
+	
+});
+$('#page1').animate({'right':'0%'},1000, function() {
+	
+});
+}
+</script>
+<script src='js/slidetounlock.js'></script>
+<style type="text/css">
 	#page-wrap{
 		position: fixed;
 		top:0px;
@@ -51,7 +52,7 @@
 	#logoSml{
 		height: 120px;
 	}
-	</style>
+</style>
 </head>
 
 <body>
@@ -97,9 +98,9 @@
 			</tr>
 			<tr>
 				<td>
-					<div id="well">
+					<div class="well">
 
-						<h2><span>Deslice para opinar</span><strong id="slider"></strong></h2>
+						<h2><span>Deslice para opinar</span><strong class="slider"></strong></h2>
 
 					</div>
 				</td>
