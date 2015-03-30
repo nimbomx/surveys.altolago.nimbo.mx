@@ -91,7 +91,7 @@ function getSurveys(date){
 
       db.transaction(function (tx) {  
         for(m in res.survey_structure){
-          tx.executeSql('INSERT INTO Structure (id, id_survey) VALUES (?,?)',[res.survey_structure[m].id,res.survey_structure[m].id_survey,res.survey_structure[m].id_kind]);
+          tx.executeSql('INSERT INTO Structure (id, id_survey) VALUES (?,?)',[res.survey_structure[m].id,res.survey_structure[m].id_survey]);
         }
         if(!surveysW)writeSurveys();
       });
