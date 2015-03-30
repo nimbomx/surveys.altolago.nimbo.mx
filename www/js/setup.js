@@ -89,12 +89,20 @@ function onPrompt(results) {
  // alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
 }
 function getSurveys(date){
-  alert(date);
+  $('#webserviceMsg').html(date);
   $.ajax({data:{
     date:date
   },url:"http://altolago.nimbo.pro/syncsurveys"}).success(function(res){
-    $('#webserviceMsg').append(res);
-    alert('date: '+res);
+    if(res.synced=='false'){
+      alert(res.sync.id);
+      var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
+      tx.executeSql('CREATE TABLE IF NOT EXISTS Sync (id unique, name, synced_at)');
+     // tx.executeSql('DELETE FROM Sync WHERE id = ?',[res.sync.id]);
+      tx.executeSql('INSERT INTO Sync (id, name,synced_at) VALUES (?,"?",?)',[res.sync.id,res.sync.name,res.sync.synced_at]);
+      tx.executeSql('UPDATE Sync SET synced_at=? WHERE id = ?',[res.sync.synced_at,res.sync.id]);
+    }else{
+      alert('date: '+res.synced);
+    }
   });
 }
 
@@ -109,7 +117,6 @@ function syncSurvey(){
       if(len!=0){
         date=(results.rows.item(0).synced_at);
       }
-      $('#webserviceMsg').append(date);
       getSurveys(date);
     });
   });
