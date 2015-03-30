@@ -29,7 +29,7 @@ background: -webkit-linear-gradient(top, rgba(87,87,90,1) 0%, rgba(87,87,90,1) 9
 }
 #page-wrap { width: 100%; height: 100%; position: fixed; }
 
-#well {
+#well,#well2 {
 	padding: 0px;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
@@ -46,7 +46,7 @@ background: -webkit-linear-gradient(top, rgba(87,87,90,1) 0%, rgba(87,87,90,1) 9
 	margin: auto;
 	position: relative;;
 }
-.well,.well2{
+/*.well,.well2{
 	padding: 0px;
 	-webkit-border-radius: 30px;
 	-moz-border-radius: 30px;
@@ -62,7 +62,7 @@ background: -webkit-linear-gradient(top, rgba(87,87,90,1) 0%, rgba(87,87,90,1) 9
 	width: 520px;
 	margin: auto;
 	position: relative;;
-}
+}*/
 
 h2 {
 
@@ -100,7 +100,7 @@ h2 span{
 	line-height: 1;
 
 }
-.slider {
+/*.slider {
 	background: url(../images/arrow.png) center center no-repeat;
 	width: 120px;
 	height: 70px;
@@ -108,7 +108,7 @@ h2 span{
 	vertical-align: middle;
 	line-height: 1;
 
-}
+}*/
 @-webkit-keyframes slidetounlock {
 	0% {
 		background-position: 720px 0;
