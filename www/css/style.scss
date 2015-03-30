@@ -46,6 +46,23 @@ background: -webkit-linear-gradient(top, rgba(87,87,90,1) 0%, rgba(87,87,90,1) 9
 	margin: auto;
 	position: relative;;
 }
+.well{
+	padding: 0px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 14px;
+	
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0, #303031),color-stop(1, #2f2f31));
+	
+	border: none; 
+	overflow: hidden; 
+	
+	-webkit-user-select: none;
+	height: 70px;
+	width: 520px;
+	margin: auto;
+	position: relative;;
+}
 
 h2 {
 
@@ -83,7 +100,15 @@ h2 span{
 	line-height: 1;
 
 }
+.slider {
+	background: url(../images/arrow.png) center center no-repeat;
+	width: 120px;
+	height: 70px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1;
 
+}
 @-webkit-keyframes slidetounlock {
 	0% {
 		background-position: 720px 0;
