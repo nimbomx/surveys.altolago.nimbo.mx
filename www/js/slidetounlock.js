@@ -43,7 +43,7 @@ $(function() {
 	    this.style.webkitTransform = 'translateX(397px)';
 	}, false);
 
-	$('.slider')[0].addEventListener('touchmove', function(event) {
+	/*$('.slider')[0].addEventListener('touchmove', function(event) {
 	    event.preventDefault();
 	    var el = event.target;
 	    var touch = event.touches[0];
@@ -61,6 +61,5 @@ $(function() {
 	    this.style.webkitTransition = '-webkit-transform 0.3s ease-in';
 	    this.addEventListener( 'webkitTransitionEnd', function( event ) { this.style.webkitTransition = 'none'; }, false );
 	    this.style.webkitTransform = 'translateX(397px)';
-	}, false);
-
+	}, false);*/
 });
