@@ -1,9 +1,5 @@
 
-function startSurvey(){
-	$('#logo').animate({'height':'100px'},1000,function(){
-		$('#well').fadeOut();
-	});
-}
+
 
 $(function() {
 	$("#slider").draggable({
