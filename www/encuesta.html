@@ -21,7 +21,7 @@
 			alert(idSurvey);
 			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
 			db.transaction(function (tx) {
-				tx.executeSql('SELECT * FROM Surveys', [], function (tx, results) {
+				tx.executeSql('SELECT * FROM Surveys WHERE id = ?', [idSurvey], function (tx, results) {
 					var len = results.rows.length;
 					alert(len);
 					//alert(results.rows.item(0)['name']);

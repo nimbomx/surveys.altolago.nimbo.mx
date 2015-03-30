@@ -42,7 +42,7 @@ $(function() {
 	    this.addEventListener( 'webkitTransitionEnd', function( event ) { this.style.webkitTransition = 'none'; }, false );
 	    this.style.webkitTransform = 'translateX(397px)';
 	}, false);
-	
+
 	$('.slider')[0].addEventListener('touchmove', function(event) {
 	    event.preventDefault();
 	    var el = event.target;
@@ -53,7 +53,7 @@ $(function() {
 	    if(curX > 397) return;
 	    
 	    if(curX < 50){
-	    	startSurvey();
+	    	alert('s');
 	    }
 	   	el.style.webkitTransform = 'translateX(' + curX + 'px)'; 
 	}, false);
