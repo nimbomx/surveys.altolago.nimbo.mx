@@ -2,7 +2,7 @@
 
 
 $(function() {
-	$("#slider").draggable({
+	/*$("#slider").draggable({
 		axis: 'x',
 		containment: 'parent',
 		drag: function(event, ui) {
@@ -17,7 +17,7 @@ $(function() {
 				})
 			}
 		}
-	});
+	});*/
 	
 	// The following credit: http://www.evanblack.com/blog/touch-slide-to-unlock/
 	$('#slider')[0].style.webkitTransform = 'translateX(397px)';
@@ -53,7 +53,7 @@ $(function() {
 	    if(curX > 397) return;
 	    
 	    if(curX < 50){
-	    	alert('s');
+	    	startSurvey();
 	    }
 	   	el.style.webkitTransform = 'translateX(' + curX + 'px)'; 
 	}, false);
