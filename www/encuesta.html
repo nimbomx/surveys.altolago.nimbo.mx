@@ -30,45 +30,41 @@
 			});
 		})
 
-	
+
 		function startSurvey(){
-			/*$('#logo').animate({'height':'100px'},1000,function(){
-				$('#well').fadeOut();
-			});*/
+			$('#page-wrap').animate({'right':'100%'},400, function() {
 
-$('#page-wrap').animate({'right':'100%'},500, function() {
+			});
+			$('#page1').animate({'right':'0%'},800, function() {
 
-});
-$('#page1').animate({'right':'0%'},1000, function() {
+			});
+		}
+	</script>
+	<script src='js/slidetounlock.js'></script>
+	<style type="text/css">
+		#page-wrap{
+			position: fixed;
+			top:0px;
+			width: 100%;
+			right: 0%;
+			bottom: 0px;
+		}
+		.page{
+			position: fixed;
+			top:0px;
+			width: 100%;
+			right: -100%;
+			bottom: 0px;
+		}
+		#logoSml{
+			height: 150px;
+			text-align: center;;
 
-});
-}
-</script>
-<script src='js/slidetounlock.js'></script>
-<style type="text/css">
-	#page-wrap{
-		position: fixed;
-		top:0px;
-		width: 100%;
-		right: 0%;
-		bottom: 0px;
-	}
-	.page{
-		position: fixed;
-		top:0px;
-		width: 100%;
-		right: -100%;
-		bottom: 0px;
-	}
-	#logoSml{
-		height: 150px;
-		text-align: center;;
-
-	}
-	#logoSml img{
-		max-height: 100%;
-	}
-</style>
+		}
+		#logoSml img{
+			max-height: 100%;
+		}
+	</style>
 </head>
 
 <body>
