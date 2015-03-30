@@ -61,7 +61,7 @@
 			}
 			currentPage++;
 			$('#page'+currentPage).animate({'right':'0%'},800, function() {
-				$('.slider')[0].style.webkitTransform = 'translateX(-97px)';
+				$('.slider')[0].style.webkitTransform = 'translateX(197px)';
 				animateTxtBtn();
 				animateEmoBtn();
 			});
@@ -69,11 +69,10 @@
 		function startSurvey(){
 			$('#page-wrap').animate({'right':'100%'},400);
 			nextPage();
-			$('.slider')[0].style.webkitTransform = 'translateX(197px)';
 
 		}
 		$(function(){
-			$('#txtBtn').on('click',function(){
+			$('.txtBtn').on('click',function(){
 				nextPage();
 			});
 		})
