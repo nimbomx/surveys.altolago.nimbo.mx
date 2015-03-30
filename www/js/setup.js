@@ -83,6 +83,21 @@ function getSurveys(date){
         }
         if(!surveysW)writeSurveys();
       });
+
+      db.transaction(function (tx) {  
+        tx.executeSql('DROP TABLE SurveyStructure');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS SurveyStructure (id unique, id_survey,id_kind, values, order,group)');
+      });
+      db.transaction(function (tx) {  
+        var len = res.survey_structure.length;
+        for(n in res.survey_structure){
+          tx.executeSql('INSERT INTO SurveyStructure (id, id_survey,id_kind, values, order,group) VALUES (?,?,?,?,?,?)',
+            [res.survey_structure[n].id,res.survey_structure[n].id_survey,res.survey_structure[n].id_kind,res.survey_structure[n].values,res.survey_structure[n].order,res.survey_structure[n].group]);
+        }
+        if(!surveysW)writeSurveys();
+      });
+
+
       db.transaction(function (tx) {  
         tx.executeSql('UPDATE Sync SET synced_at=? WHERE name = ?',[res.sync.synced_at,'Surveys']);
       });

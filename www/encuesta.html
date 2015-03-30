@@ -20,8 +20,10 @@
 			idSurvey=id.replace('#','');
 			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
 			db.transaction(function (tx) {
-				tx.executeSql('SELECT * FROM Surveys WHERE id='+idSurvey, [], function (tx, results) {
-					$('#testM').html(results.rows.item(0).name);
+				tx.executeSql('SELECT * FROM SurveyStructure WHERE id_survey='+idSurvey, [], function (tx, results) {
+					var len = res.survey_structure.length;
+					$('#testM').html(len);
+					//$('#testM').html(results.rows.item(0).name);
 				});
 			});
 		})
@@ -115,9 +117,9 @@
 			</tr>
 			<tr>
 				<td>
-					<div id="well">
+					<div class="well">
 
-						<h2><span>Deslice para opinar</span><strong id="slider"></strong></h2>
+						<h2><span>Deslice para opinar</span><strong class="slider"></strong></h2>
 
 					</div>
 				</td>
