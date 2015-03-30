@@ -2,10 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "D:\\Phonegap\\AltoLago"
-		},
-		{
-			"path": "D:\\localhost\\htdocs\\nimbo3\\altolago.nimbo.pro"
+			"follow_symlinks": true,
+			"path": "C:\\phonegap\\surveys.altolago.nimbo.mx"
 		}
 	]
 }
