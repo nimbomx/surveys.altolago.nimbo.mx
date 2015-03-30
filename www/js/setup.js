@@ -79,19 +79,21 @@ function getSurveys(date){
       db.transaction(function (tx) {  
         for(n in res.surveys){
           tx.executeSql('INSERT INTO Surveys (id, name,description,active) VALUES (?,?,?,?)',[res.surveys[n].id,res.surveys[n].name,res.surveys[n].description,res.surveys[n].active]);
-          tx.executeSql('SELECT * FROM Structure', [], function (tx, results) {
-          alert(results.rows.length);
         }
       });
-
       db.transaction(function (tx) { 
         tx.executeSql('DROP TABLE Structure');
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Structure (id unique, id_survey)');
+      });
+      db.transaction(function (tx) { 
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Structure (id unique, id_survey,id_kind,val)');
       });
 
       db.transaction(function (tx) {  
         for(m in res.survey_structure){
-          tx.executeSql('INSERT INTO Structure (id, id_survey) VALUES (?,?)',[res.survey_structure[m].id,res.survey_structure[m].id_survey]);
+          tx.executeSql('INSERT INTO Structure (id, id_survey,id_kind,val) VALUES (?,?,?,?)',[res.survey_structure[m].id,res.survey_structure[m].id_survey,res.survey_structure[m].id_kind,res.survey_structure[m].values]);
+          tx.executeSql('SELECT * FROM Structure', [], function (tx, results) {
+          alert(results.rows.length);
+          });
         }
         if(!surveysW)writeSurveys();
       });

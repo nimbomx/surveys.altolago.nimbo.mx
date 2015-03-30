@@ -29,9 +29,7 @@
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM Structure', [], function (tx, results) {
 					var len = results.rows.length;
-					alert(len)
-					$('#testM').append(len);
-					//$('#testM').html(results.rows.item(0).name);
+					$('#testM').append('<br>'+len);
 				});
 			})
 		});
