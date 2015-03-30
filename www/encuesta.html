@@ -22,8 +22,10 @@
 			var db = openDatabase('mydb', '1.0', 'ALTOLAGO DB', 2 * 1024 * 1024);
 			db.transaction(function (tx) {
 				tx.executeSql('SELECT * FROM Surveys WHERE id = ?', [idSurvey], function (tx, results) {
-					alert('s');
-					//alert(results.rows.item(0).name);
+					var len = results.rows.length;
+					alert(len);
+					alert(results.rows.item(0)['name']);
+					alert(results.rows.item(0).name);
 				});
 			});
 		})
@@ -98,10 +100,7 @@ $('#page1').animate({'right':'0%'},1000, function() {
 	</div>
 	<div class="page" id="page1">
 		<table style="width:100%; height:100%;">
-			<tr>
-				<td></td>
 
-			</tr>
 			<tr>
 				<td><div id="logoSml"><img src="images/LogoAltoLagoBig.png"></div></td>
 

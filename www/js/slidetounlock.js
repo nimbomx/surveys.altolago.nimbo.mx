@@ -21,6 +21,7 @@ $(function() {
 	
 	// The following credit: http://www.evanblack.com/blog/touch-slide-to-unlock/
 	$('#slider')[0].style.webkitTransform = 'translateX(397px)';
+	$('.slider')[0].style.webkitTransform = 'translateX(397px)';
 	$('#slider')[0].addEventListener('touchmove', function(event) {
 	    event.preventDefault();
 	    var el = event.target;
