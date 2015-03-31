@@ -12,6 +12,14 @@
 	font-family: WALKWAYCondensedBold;
   src: url("../fonts/WALKWAY CONDENSED BOLD.TTF")  format('truetype') /* Safari, Android, iOS */
 }
+@font-face {
+	font-family: WALKWAYBlack;
+  src: url("../fonts/WALKWAY BLACK.TTF")  format('truetype') /* Safari, Android, iOS */
+}
+@font-face {
+	font-family: WALKWAYSemiBold;
+  src: url("../fonts/WALKWAY SEMIBOLD.TTF")  format('truetype') /* Safari, Android, iOS */
+}
 
 
 * { margin: 0; padding: 0; }
@@ -146,7 +154,16 @@ h2 span{
 	height: 100px;
 	cursor:pointer;
 }
-
+.wBold{
+	font-family: WALKWAYBold, sans-serif;
+	font-size: normal;
+	font-size: 50px;
+}
+.wBlack{
+	font-family: WALKWAYBlack, sans-serif;
+	font-size: normal;
+	font-size: 50px;
+}
 .openQ{
 	padding:30px;
 	font-size: 30px;
