@@ -245,6 +245,26 @@ h2 span{
 		}
 	}
 }
+.emoBtn.emo1{
+	.active{
+		background: url("../img/emo01.png") top center no-repeat;
+	}
+}
+.emoBtn.emo2{
+	.active{
+		background: url("../img/emo02.png") top center no-repeat;
+	}
+}
+.emoBtn.emo3{
+	.active{
+		background: url("../img/emo03.png") top center no-repeat;
+	}
+}
+.emoBtn.emo4{
+	.active{
+		background: url("../img/emo04.png") top center no-repeat;
+	}
+}
 @-webkit-keyframes bounceOut {
 	0%{ top:-50px; opacity:0;}
 	20%,50%,80%,100%{ top:0px; opacity:1; }
