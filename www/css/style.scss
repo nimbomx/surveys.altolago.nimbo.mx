@@ -177,6 +177,7 @@ h2 span{
 	font-family: WALKWAYSemiBold, sans-serif;
 	font-size: normal;
 	color:#000;
+	outline:none;
 }
 
 .txtBtn, .emoBtn{
@@ -273,20 +274,32 @@ h2 span{
 	.active{
 		background: url("../img/emo1.png") top center no-repeat;
 	}
+	.shadow{
+		background: url("../img/emoBtnShadow.png") top center no-repeat;
+	}
 }
 .emoBtn.emo2{
 	.active{
 		background: url("../img/emo2.png") top center no-repeat;
+	}
+	.shadow{
+		background: url("../img/emoBtnShadow.png") top center no-repeat;
 	}
 }
 .emoBtn.emo3{
 	.active{
 		background: url("../img/emo3.png") top center no-repeat;
 	}
+	.shadow{
+		background: url("../img/emoBtnShadow.png") top center no-repeat;
+	}
 }
 .emoBtn.emo4{
 	.active{
 		background: url("../img/emo4.png") top center no-repeat;
+	}
+	.shadow{
+		background: url("../img/emoBtnShadow.png") top center no-repeat;
 	}
 }
 @-webkit-keyframes bounceOut {
