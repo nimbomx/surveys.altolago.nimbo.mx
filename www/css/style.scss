@@ -231,21 +231,21 @@ h2 span{
 	&.show{
 		.shadow{
 			opacity:1;
-			transition: all .5s;
+			transition: all .4s;
 		}
 		.active{
 			top:0px;
 			opacity:1;
-			transition: all .5s;
+			transition: all .4s;
 		}
 	}
 	&.bounce{
 		.shadow{
-			-webkit-animation:bounceOutShadow .8s linear;
+			-webkit-animation:bounceOutShadow .9s linear;
 			opacity:1;
 		}
 		.active{
-			-webkit-animation:bounceOut .8s linear;
+			-webkit-animation:bounceOut .9s linear;
 			opacity:1;
 			top:0px;
 		}
